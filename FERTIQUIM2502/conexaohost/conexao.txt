@@ -1,0 +1,20 @@
+<?php
+// Ambiente local
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $host = 'localhost';
+    $user = 'root';
+    $pass = '';
+    $db = 'fertiquim';
+} else {
+    // Ambiente da Hostinger
+    $host = 'localhost';
+    $user = 'usuario_do_hostinger';
+    $pass = 'senha_do_hostinger';
+    $db = 'fertiquim_db';
+}
+
+$conn = new mysqli($host, $user, $pass, $db);
+if ($conn->connect_error) {
+    die('Erro de conexão: ' . $conn->connect_error);
+}
+?>
