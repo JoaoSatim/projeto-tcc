@@ -255,3 +255,13 @@ footer {
   color: #fff;
   border-left: 8px solid transparent;
 }
+.VendasInternas-card {
+  background: url('../img/VendasInternas.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
+.VendasExternas-card {
+  background: url('../img/VendasExternas.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
