@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "fertiquim");
+require_once '../conexaohost/conexao.php';
 
 // Verifica erro de conexão
 if ($conn->connect_error) {

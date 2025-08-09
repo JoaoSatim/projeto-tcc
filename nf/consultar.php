@@ -1,9 +1,6 @@
 <?php
+require_once '../conexaohost/conexao.php';
 session_start();
-$conn = new mysqli("localhost", "root", "", "fertiquim");
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
-}
 
 // Filtro da busca (agora busca também por CNPJ e nome_fantasia)
 $filtro = "";

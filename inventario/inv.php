@@ -1,5 +1,5 @@
 <?php
-// Se for usar algo dinâmico, mantenha o PHP, se não, pode tirar
+require_once '../conexaohost/conexao.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

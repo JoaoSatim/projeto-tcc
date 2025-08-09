@@ -1,4 +1,7 @@
 <?php
+require_once '../conexaohost/conexao.php';
+session_start();
+
 include('../sessao/verifica_sessao.php');
 
 restringirAcesso(['Recursos Humanos', 'Administrador', 'Proprietario']);

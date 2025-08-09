@@ -1,14 +1,10 @@
 <?php
+require_once '../conexaohost/conexao.php';
 session_start();
 
 if (!isset($_SESSION['nome_usuario'])) {
     header("Location: ../pglogin/pglogin.php");
     exit;
-}
-
-$conn = new mysqli("localhost", "root", "", "fertiquim");
-if ($conn->connect_error) {
-    die("Erro de conexão: " . $conn->connect_error);
 }
 
 $resultado = $conn->query("SELECT * FROM cadastro_funcionario ORDER BY nome ASC");

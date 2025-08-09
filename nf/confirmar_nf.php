@@ -1,9 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "fertiquim");
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
-}
-
+require_once '../conexaohost/conexao.php';
 $nf_id = isset($_POST['nf_id']) ? (int)$_POST['nf_id'] : 0;
 if ($nf_id === 0) {
     die("ID da nota fiscal inválido.");

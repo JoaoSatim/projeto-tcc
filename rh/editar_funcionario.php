@@ -1,8 +1,13 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "fertiquim");
-if ($conn->connect_error) {
-    die("Erro: " . $conn->connect_error);
+session_start();  
+require_once '../conexaohost/conexao.php';
+
+
+if (!isset($_SESSION['nome_usuario'])) {
+    header("Location: ../pglogin/pglogin.php");
+    exit;
 }
+
 
 // Verifica se veio via POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

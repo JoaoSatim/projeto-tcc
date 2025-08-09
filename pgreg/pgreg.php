@@ -1,15 +1,7 @@
 <?php
+require_once '../conexaohost/conexao.php';
 session_start();
 
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db = 'fertiquim';
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die('Erro na conexão com o banco de dados: ' . $conn->connect_error);
-}
 $cadastro_sucesso = false;
 
 if (isset($_POST['submit'])) {

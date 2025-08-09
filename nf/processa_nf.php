@@ -1,10 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "fertiquim");
-
-// Verifica conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
+require_once '../conexaohost/conexao.php';
 
 // Recebe os dados da NF
 $numero_nf = $_POST['numero_nf'];

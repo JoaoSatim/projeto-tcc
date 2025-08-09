@@ -1,16 +1,11 @@
 <?php
+require_once '../conexaohost/coneao.php';
 session_start();
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['nome_usuario'])) {
     header('Location: ../pglogin/pglogin.php');
     exit;
-}
-
-// Conexão com o banco
-$conn = new mysqli("localhost", "root", "", "fertiquim");
-if ($conn->connect_error) {
-    die('Erro de conexão: ' . $conn->connect_error);
 }
 
 $funcionario_id = $_GET['funcionario_id'] ?? null;

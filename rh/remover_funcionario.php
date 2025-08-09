@@ -1,4 +1,6 @@
 <?php
+
+require_once '../conexaohost/conexao.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(403);
     exit("Acesso inválido.");
@@ -7,11 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 if (!isset($_POST['id'])) {
     http_response_code(400);
     exit("ID não fornecido.");
-}
-
-$conn = new mysqli("localhost", "root", "", "fertiquim");
-if ($conn->connect_error) {
-    die("Erro: " . $conn->connect_error);
 }
 
 $id = $_POST['id'];
