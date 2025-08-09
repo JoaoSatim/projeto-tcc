@@ -1,30 +1,46 @@
 <?php
+
+require_once '../conexaohost/conexao.php';
+
 session_start();
-
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db = 'fertiquim';
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-  die('Erro de conexão: ' . $conn->connect_error);
-}
+include('../sessao/verifica_sessao.php');
 
 if (isset($_POST['adicionar'])) {
-  $nome = $_POST['nome'];
-  $quantidade = $_POST['quantidade'];
-  $unidade = $_POST['unidade'];
-  $tipo = $_POST['tipo'];
-  $usuario = $_SESSION['usuario'];
+    $nome = $_POST['nome'];
+    $quantidade = floatval($_POST['quantidade']);
+    $unidade = $_POST['unidade'];
+    $tipo = $_POST['tipo'];
+    $usuario = $_SESSION['nome_usuario'] ?? 'Desconhecido';
 
-  $conn->query("INSERT INTO estoque_fertilizantes (nome_produto, quantidade, unidade, tipo, data_atualizacao, usuario) 
-                VALUES ('$nome', $quantidade, '$unidade', '$tipo', NOW(), '$usuario')");
+    // Verifica se já existe o mesmo produto e unidade
+    $check = $conn->query("SELECT id, quantidade FROM estoque_fertilizantes 
+                           WHERE nome_produto = '$nome' AND unidade = '$unidade'");
+
+    if ($check && $check->num_rows > 0) {
+        // Se existir, atualiza a quantidade
+        $row = $check->fetch_assoc();
+        $nova_qtd = $row['quantidade'] + $quantidade;
+
+        $conn->query("UPDATE estoque_fertilizantes 
+                      SET quantidade = $nova_qtd, 
+                          data_atualizacao = NOW(), 
+                          usuario = '$usuario' 
+                      WHERE id = {$row['id']}");
+    } else {
+        // Se não existir, insere um novo registro
+        $conn->query("INSERT INTO estoque_fertilizantes 
+                      (nome_produto, quantidade, unidade, tipo, data_atualizacao, usuario) 
+                      VALUES ('$nome', $quantidade, '$unidade', '$tipo', NOW(), '$usuario')");
+    }
+
+    // Redireciona para evitar duplicação no refresh
+    header("Location: estoque.php");
+    exit;
 }
 
 if (isset($_GET['remover'])) {
-  $id = $_GET['remover'];
-  $conn->query("DELETE FROM estoque_fertilizantes WHERE id = $id");
+    $id = intval($_GET['remover']);
+    $conn->query("DELETE FROM estoque_fertilizantes WHERE id = $id");
 }
 
 $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atualizacao DESC");
@@ -60,12 +76,13 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
       <input type="text" name="unidade" placeholder="Unidade (ex: kg, L)" required>
       
       <select name="tipo" required>
-                <option value="">Selecione</option>
-                <option value="Material de informática">Material de informática</option>
-                <option value="Ferramentas">Ferramentas</option>
-                <option value="Matéria-prima">Matéria-prima</option>
-                <option value="Material de Escritorio">Material de Escritório</option>
-                <option value="EPI">EPi's</option>
+        <option value="">Selecione</option>
+        <option value="Material de informática">Material de informática</option>
+        <option value="Ferramentas">Ferramentas</option>
+        <option value="Matéria-prima">Matéria-prima</option>
+        <option value="Material de Escritorio">Material de Escritório</option>
+        <option value="EPI">EPi's</option>
+        <option value="Saca 50kg">Sacaria</option>
       </select>
 
       <button type="submit" name="adicionar">Adicionar</button>
