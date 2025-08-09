@@ -1,11 +1,5 @@
 <?php
-require_once '../conexaohost/conexao.php';
-session_start();
 
-if (!isset($_SESSION['nome_usuario'])) {
-    header("Location: ../pglogin/pglogin.php");
-    exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,14 +11,7 @@ if (!isset($_SESSION['nome_usuario'])) {
 
 </head>
 <body>
-  <header>
-    <h1>FERTIQUIM Fertilizantes</h1>
-    <nav>
-      <a href="../pginicial/pginicial.php">Início</a>
-      <a href="../pglogin/pglogin.php">Sair</a>
-    </nav>
-  </header>
-
+  <?php include '../base/cabecalho.php'; ?>
   <div class="container">
     <h2 class="titulo">Painel Principal</h2>
     <div class="cards">

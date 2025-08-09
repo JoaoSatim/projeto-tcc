@@ -1,7 +1,6 @@
 <?php
-session_start();
-
 require_once '../conexaohost/conexao.php';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['username'];

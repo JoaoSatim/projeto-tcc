@@ -1,12 +1,6 @@
 <?php
 require_once '../conexaohost/conexao.php';
 
-// Verifica erro de conexão
-if ($conn->connect_error) {
-  die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-}
-
-// Consulta as NFs pendentes
 $nf_result = $conn->query("SELECT * FROM nf_pendente ORDER BY data_registro DESC");
 ?>
 
