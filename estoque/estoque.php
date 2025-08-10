@@ -1,8 +1,6 @@
 <?php
 
 require_once '../conexaohost/conexao.php';
-
-session_start();
 include('../sessao/verifica_sessao.php');
 
 if (isset($_POST['adicionar'])) {
@@ -55,19 +53,9 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
   <link rel="stylesheet" href="../css/estilo.css">
 </head>
 <body>
-  <header>
-    <h1>Fertiquim - Estoque de Fertilizantes</h1>
-    <nav>
-      <a href="../pginicial/pginicial.php">Início</a>
-      <a href="../inventario/inv.php">Inventário</a>
-      <a href="../estoque/estoque.php">Controle</a>
-      <a href="../nf/inserir.php">Inserir NF's</a>
-      <a href="../nf/consultar.php">Consultar NF's</a>
-      <a href="../nf/pendente.php">NF's Pendente</a>  
-      <a href="../pglogin/pglogin.php">Sair</a>
-    </nav>
-  </header>
-
+<?php
+include '../base/estoque.php';
+?>
   <div class="container">
     <h2 class="titulo">Adicionar Material Manualmente</h2>
     <form method="post" class="formulario">
@@ -119,14 +107,8 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
     </table>
   </div>
 
-  <footer>
-    &copy; 2025 Fertiquim Fertilizantes
-  </footer>
-
-  <?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
-    <div class="usuario-logado">
-      <?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>
-    </div>
-  <?php endif; ?>
+  <?php
+  include '../base/rodape.php';
+  ?>
 </body>
 </html>

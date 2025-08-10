@@ -18,7 +18,7 @@
       <a href="../financeiro/financeiro.php" class="card VendasInternas-card">
         <h2></h2>
       </a>
-      <a href="../rh/rh.php" class="card VendasExternas-card">
+      <a href="vendas_sacaria.php" class="card VendasExternas-card">
         <h2></h2>
       </a>
     </div>

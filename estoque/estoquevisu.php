@@ -1,14 +1,9 @@
 <?php
 require_once '../conexaohost/conexao.php';
-session_start();
+
 include('../sessao/verifica_sessao.php');
 
 restringirAcesso(['Almoxarifado', 'Administrador', 'Proprietario']);
-
-if (!isset($_SESSION['nome_usuario'])) {
-    header('Location: ../pglogin/pglogin.php');
-    exit;
-}
 
 // Filtros
 $nome = $_GET['nome_produto'] ?? '';
@@ -55,19 +50,9 @@ $result = $conn->query($sql);
   </style>
 </head>
 <body>
-  <header>
-    <h1>FERTIQUIM Fertilizantes</h1>
-    <nav>
-      <a href="../pginicial/pginicial.php">Início</a>
-      <a href="../inventario/inv.php">Inventário</a>
-      <a href="../estoque/estoque.php">Controle</a>
-      <a href="../nf/inserir.php">Inserir NF's</a>
-      <a href="../nf/consultar.php">Consultar NF's</a>
-      <a href="../nf/pendente.php">NF's Pendente</a>  
-      <a href="../pglogin/pglogin.php">Sair</a>
-    </nav>
-  </header>
-
+<?php
+ include '../base/estoque.php'
+?>
   <div class="container">
     <h2 class="titulo">Estoque Atual</h2>
 
@@ -115,14 +100,8 @@ $result = $conn->query($sql);
       </tbody>
     </table>
   </div>
-
-  <footer>
-    &copy; 2025 Fertiquim Fertilizantes. Todos os direitos reservados.   
-  </footer>
-  <?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
-    <div class="usuario-logado">
-      <?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>
-    </div>
-  <?php endif; ?>
+<?php
+include '../base/rodape.php';
+?>
 </body>
 </html>
