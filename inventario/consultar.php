@@ -1,5 +1,5 @@
 <?php
-require_once '../conexaohost/coneao.php';
+require_once '../conexaohost/conexao.php';
 session_start();
 
 // Verifica se o usuário está logado
