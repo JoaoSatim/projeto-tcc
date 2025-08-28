@@ -185,5 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="submit" value="Salvar Alterações">
   </form>
 </div>
+<?php include '../base/rodape.php';?>
 </body>
 </html>
+    

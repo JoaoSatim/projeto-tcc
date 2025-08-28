@@ -2,6 +2,7 @@
 require_once '../conexaohost/conexao.php';
 include '../base/cabecalho.php';
 
+
 // Buscar clientes
 $sql = "SELECT id, tipo_pessoa, nome_razao, cpf_cnpj, rg_ie, data_nascimento, telefone, celular, email, endereco, numero, complemento 
         FROM clientes ORDER BY nome_razao ASC";
@@ -82,5 +83,6 @@ $res = $conn->query($sql);
     </tbody>
   </table>
 </div>
+<?php include '../base/rodape.php';?>
 </body>
 </html>

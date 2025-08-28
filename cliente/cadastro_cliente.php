@@ -123,5 +123,7 @@ require_once '../conexaohost/conexao.php';
     <input type="submit" value="Salvar Cliente">
   </form>
 </div>
+<?php include '../base/rodape.php';?>
 </body>
+
 </html>
