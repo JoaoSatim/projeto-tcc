@@ -1,6 +1,6 @@
 <?php
 require_once '../conexaohost/conexao.php';
-session_start();
+
 
 $cadastro_sucesso = false;
 

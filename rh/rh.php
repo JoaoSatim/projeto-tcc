@@ -40,7 +40,7 @@ restringirAcesso(['Recursos Humanos', 'Administrador', 'Proprietario']);
         <h2></h2>  
       </a>
 
-      <a href="treinamento/treinamento.php" class="card treinamento-card">
+      <a href="../manutencao/manutencao.php"" class="card treinamento-card">
         <h2></h2>  
       </a>
 

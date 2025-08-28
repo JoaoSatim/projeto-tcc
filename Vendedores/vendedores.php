@@ -15,14 +15,14 @@
   <div class="container">
     <h2 class="titulo">Painel Principal</h2>
     <div class="cards">
-      <a href="../financeiro/financeiro.php" class="card VendasInternas-card">
+      <a href="../manutencao/manutencao.php"" class="card VendasInternas-card">
         <h2></h2>
       </a>
-      <a href="vendas_sacaria.php" class="card VendasExternas-card">
+      <a href="../manutencao/manutencao.php"" class="card VendasExternas-card">
         <h2></h2>
       </a>
         
-      <a href="../cliente/cliente.php" class="card Clientes-card">
+      <a href="../manutencao/manutencao.php" class="card Clientes-card">
       <h2></h2>  
       </a>
 

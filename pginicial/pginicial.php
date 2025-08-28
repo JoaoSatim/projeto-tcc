@@ -28,7 +28,7 @@ if (!isset($_SESSION['nome_usuario'])) {
   <div class="container">
     <h2 class="titulo">Painel Principal</h2>
     <div class="cards">
-      <a href="../financeiro/financeiro.php" class="card financeiro-card">
+      <a href="../manutencao/manutencao.php"" class="card financeiro-card">
         <h2></h2>
       </a>
       <a href="../rh/rh.php" class="card rh-card">
