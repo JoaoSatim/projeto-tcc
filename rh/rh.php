@@ -44,6 +44,11 @@ restringirAcesso(['Recursos Humanos', 'Administrador', 'Proprietario']);
         <h2></h2>  
       </a>
 
+      <a href="../cliente/cadastro_cliente.php" class="card treinamento-card">
+        <h2></h2>  
+      </a>
+
+
     </div>
   </div>
 
