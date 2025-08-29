@@ -2,7 +2,7 @@
 require_once '../conexaohost/conexao.php';
 session_start();
 
-// Filtro da busca (agora busca também por CNPJ e nome_fantasia)
+// Filtro da busca
 $filtro = "";
 if (!empty($_GET['busca'])) {
     $busca = $conn->real_escape_string($_GET['busca']);
@@ -12,14 +12,13 @@ if (!empty($_GET['busca'])) {
             OR nome_fantasia LIKE '%$busca%'";
 }
 
-// Consulta as NFs aceitas
+// Consulta NF aceitas
 $sql = "SELECT id, numero_nf, nome_fantasia, cnpj, telefone, endereco, cep, data_confirmacao, responsavel_entrega, cpf_responsavel
         FROM nf_aceitas 
         $filtro
         ORDER BY data_confirmacao DESC";
 $result = $conn->query($sql);
 
-// Montar um array com fertilizantes por NF
 $dados = [];
 if ($result && $result->num_rows > 0) {
     while($nf = $result->fetch_assoc()) {
@@ -43,14 +42,19 @@ if ($result && $result->num_rows > 0) {
 <title>Notas Fiscais Aceitas</title>
 <link rel="stylesheet" href="../css/estilo.css">
 <style>
-    body { font-family: Arial, sans-serif; }
+    body { font-family: Arial, sans-serif; background: #f4f6f9; }
     .container { max-width: 1200px; margin: auto; padding: 20px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: left; }
+    .search-box { margin-top: 20px; display: flex; gap: 10px; }
+    .search-box input { flex: 1; padding: 8px 12px; border-radius: 6px; border: 1px solid #ccc; }
+    .search-box button { padding: 8px 16px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; }
+    .search-box button:hover { background: #45a049; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    th, td { border: 1px solid #eee; padding: 10px 12px; text-align: left; }
     th { background-color: #4CAF50; color: white; }
     tr:nth-child(even) { background: #f9f9f9; }
-    .search-box { margin-top: 20px; }
-    .expand-btn { background-color: #2196F3; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+    tr:hover { background: #f1f7ff; }
+    .expand-btn { background-color: #2196F3; color: white; border: none; padding: 6px 10px; cursor: pointer; border-radius: 5px; font-size: 14px; }
+    .expand-btn:hover { background-color: #1976D2; }
     .detalhes-nf td { padding: 0; }
     .detalhes-conteudo {
         background: #fff;
@@ -90,7 +94,7 @@ function toggleExpand(id) {
 
 <div class="container">
     <form method="get" class="search-box">
-        <input type="text" name="busca" placeholder="DATA/NOME/CNPJ" value="<?php echo isset($_GET['busca']) ? htmlspecialchars($_GET['busca']) : ''; ?>">
+        <input type="text" name="busca" placeholder="🔍 Buscar por Data, Nome ou CNPJ..." value="<?php echo isset($_GET['busca']) ? htmlspecialchars($_GET['busca']) : ''; ?>">
         <button type="submit">Buscar</button>
     </form>
 
@@ -121,13 +125,13 @@ function toggleExpand(id) {
                         <td><?php echo htmlspecialchars($nf['cep']); ?></td>
                         <td><?php echo htmlspecialchars($nf['data_confirmacao']); ?></td>
                         <td>
-                            <button class="expand-btn" onclick="toggleExpand(<?php echo $nf['id']; ?>)">⬇️</button>
+                            <button class="expand-btn" onclick="toggleExpand(<?php echo $nf['id']; ?>)">⬇️ Detalhes</button>
                         </td>
                     </tr>
                     <tr id="expand_<?php echo $nf['id']; ?>" class="detalhes-nf" style="display:none;">
                         <td colspan="9">
                             <div class="detalhes-conteudo">
-                                <strong>Conteúdo da NF:</strong><br>
+                                <strong>📌 Conteúdo da NF:</strong><br>
                                 Número: <?php echo htmlspecialchars($nf['numero_nf']); ?><br>
                                 Nome Fantasia: <?php echo htmlspecialchars($nf['nome_fantasia']); ?><br>
                                 CNPJ: <?php echo htmlspecialchars($nf['cnpj']); ?><br>
@@ -136,10 +140,9 @@ function toggleExpand(id) {
                                 CEP: <?php echo htmlspecialchars($nf['cep']); ?><br>
                                 Data de Confirmação: <?php echo htmlspecialchars($nf['data_confirmacao']); ?><br><br>
 
-                                <strong>Responsável pela conferência:</strong> <?php echo htmlspecialchars($nf['responsavel_entrega']); ?><br>
-                                
+                                <strong>👤 Responsável pela conferência:</strong> <?php echo htmlspecialchars($nf['responsavel_entrega']); ?><br><br>
 
-                                <strong>Materiais nesta NF:</strong><br>
+                                <strong>📦 Materiais nesta NF:</strong><br>
                                 <?php if (!empty($nf['fertilizantes'])): ?>
                                     <ul>
                                     <?php foreach($nf['fertilizantes'] as $f): ?>
@@ -164,14 +167,15 @@ function toggleExpand(id) {
         <p>Nenhuma nota fiscal aceita encontrada.</p>
     <?php endif; ?>
 </div>
- <footer>
+
+<footer>
     &copy; 2025 Fertiquim Fertilizantes. Todos os direitos reservados.
-  <?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
-    <div class="usuario-logado">
-      <?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>
-    </div>
-  <?php endif; ?>
-  </footer>
+    <?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
+        <div class="usuario-logado">
+            <?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>
+        </div>
+    <?php endif; ?>
+</footer>
 </body>
 </html>
 <?php $conn->close(); ?>

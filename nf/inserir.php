@@ -123,6 +123,7 @@ if (!isset($_SESSION['nome_usuario'])) {
                 <option value="Matéria-prima">Matéria-prima</option>
                 <option value="Material de Escritorio">Material de Escritório</option>
                 <option value="EPI">EPi's</option>
+                <option value="Materiais Elétricos">Materiais elétricos</option>
               </select>
             </div>
             <button type="button" class="remove-btn" onclick="removeFertilizante(this)">Remover</button>

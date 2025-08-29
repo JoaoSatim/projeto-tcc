@@ -18,7 +18,7 @@
       <a href="../manutencao/manutencao.php"" class="card VendasInternas-card">
         <h2></h2>
       </a>
-      <a href="../manutencao/manutencao.php" class="card VendasExternas-card">
+      <a href="vendas_sacarias.php" class="card VendasExternas-card">
         <h2></h2>
       </a>
         
