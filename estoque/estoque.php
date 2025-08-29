@@ -46,14 +46,16 @@ if (isset($_GET['editar'])) {
     $editar = $conn->query("SELECT * FROM estoque_fertilizantes WHERE id = $id")->fetch_assoc();
 }
 
-// Atualizar quantidade
+// Atualizar produto (nome e quantidade)
 if (isset($_POST['atualizar'])) {
     $id = intval($_POST['id']);
+    $nome = $_POST['nome'];
     $quantidade = floatval($_POST['quantidade']);
     $usuario = $_SESSION['nome_usuario'] ?? 'Desconhecido';
 
     $conn->query("UPDATE estoque_fertilizantes 
-                  SET quantidade = $quantidade, 
+                  SET nome_produto = '$nome',
+                      quantidade = $quantidade, 
                       data_atualizacao = NOW(), 
                       usuario = '$usuario' 
                   WHERE id = $id");
@@ -79,15 +81,22 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
       align-items: center;
       gap: 10px;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
-    .editar-form .label-editar {
+    .editar-form label {
       font-size: 16px;
+      font-weight: bold;
+    }
+
+    .editar-form input {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
     .editar-form .input-pequeno {
-      width: 100px;   /* tamanho menor */
-      padding: 5px;
+      width: 100px;
       text-align: right;
     }
 
@@ -129,15 +138,19 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
   </form>
 
   <?php if (isset($editar)) { ?>
-    <h2 class="titulo">Editar Quantidade</h2>
+    <h2 class="titulo">Editar Produto</h2>
     <form method="post" class="editar-form">
       <input type="hidden" name="id" value="<?php echo $editar['id']; ?>">
-      <label class="label-editar">
-        Produto: <strong><?php echo $editar['nome_produto']; ?></strong>
-      </label>
+
+      <label>Nome:</label>
+      <input type="text" name="nome" 
+             value="<?php echo $editar['nome_produto']; ?>" required>
+
+      <label>Quantidade:</label>
       <input type="number" name="quantidade" 
              value="<?php echo $editar['quantidade']; ?>" 
              step="0.01" required class="input-pequeno">
+
       <button type="submit" name="atualizar">Atualizar</button>
     </form>
   <?php } ?>

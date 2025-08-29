@@ -74,7 +74,7 @@
     
     <a href="../pginicial/pginicial.php" class="btn-home">Ir para Página Inicial</a>
 
-    <div class="footer">© <?php echo date("Y"); ?> - Seu Sistema</div>
+    <div class="footer">© <?php echo date("Y"); ?> - Fertiquim Fertilizantes LTDA.</div>
   </div>
 </body>
 </html>

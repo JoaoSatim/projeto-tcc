@@ -16,9 +16,13 @@ if($resUltima && $resUltima->num_rows > 0){
 $sqlClientes = "SELECT id, nome_razao, cpf_cnpj, telefone, endereco, cep FROM clientes ORDER BY nome_razao";
 $resClientes = $conn->query($sqlClientes);
 
-// Buscar produtos do estoque
-$sqlProdutos = "SELECT id, nome_produto, unidade, tipo FROM estoque_fertilizantes ORDER BY nome_produto";
+// Buscar produtos do estoque (apenas Saca 50kg)
+$sqlProdutos = "SELECT id, nome_produto, unidade, tipo 
+                FROM estoque_fertilizantes 
+                WHERE tipo = 'Saca 50kg'
+                ORDER BY nome_produto";
 $resProdutos = $conn->query($sqlProdutos);
+
 $produtos = [];
 while($row = $resProdutos->fetch_assoc()){
   $produtos[] = $row;
