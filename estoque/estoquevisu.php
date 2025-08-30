@@ -68,6 +68,7 @@ $result = $conn->query($sql);
         <option value="Material de Escritório" <?php if ($tipo === 'Material de Escritório') echo 'selected'; ?>>Material de Escritório</option>
         <option value="Saca 50kg" <?php if ($tipo === 'Saca 50kg') echo 'selected'; ?>>Sacaria</option>
         <option value="Materiais Elétricos" <?php if ($tipo === 'Materiais Elétricos') echo 'selected'; ?>>Materiais Elétricos</option>
+        <option value="Materiais de Consumo" <?php if ($tipo === 'Materiais de Consumo') echo 'selected'; ?>>Materiais de Consumo</option>
       </select>
       <button type="submit">Filtrar</button>
     </form>

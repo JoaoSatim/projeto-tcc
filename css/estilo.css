@@ -280,3 +280,13 @@ footer {
   color: #fff;
   border-left: 8px solid transparent;
 }
+.Despesas-card {
+  background: url('../img/DESPESAS.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
+.Consultar_Despesas-card {
+  background: url('../img/Consultar_despesas.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
