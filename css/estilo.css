@@ -290,3 +290,18 @@ footer {
   color: #fff;
   border-left: 8px solid transparent;
 }
+.frota-card {
+  background: url('../img/frota.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
+.registrar_veiculo-card {
+  background: url('../img/registrar_veiculo.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
+.controle_consumo-card {
+  background: url('../img/controle_consumo.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}

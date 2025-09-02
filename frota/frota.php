@@ -31,14 +31,12 @@ if (!isset($_SESSION['nome_usuario'])) {
   <div class="container">
     <h2 class="titulo">Painel Principal</h2>
     <div class="cards">
-      <a href="despesas.php" class="card Despesas-card">
-        <h2></h2>
-      </a>
-     <a href="consultar_despesas.php" class="card Consultar_Despesas-card">
+
+     <a href="controle_de_frota.php" class="card registrar_veiculo-card">
      <h2></h2>
      </a>
 
-     <a href="../frota/frota.php" class="card frota-card">
+     <a href="controle_de_combustivel.php" class="card controle_consumo-card">
      <h2></h2>
      </a>
 
