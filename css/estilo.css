@@ -305,3 +305,8 @@ footer {
   color: #fff;
   border-left: 8px solid transparent;
 }
+.Venda_pendente-card {
+  background: url('../img/vendas_pendente.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}

@@ -26,6 +26,10 @@
       <h2></h2>  
       </a>
 
+      <a href="pendente.php" class="card Venda_pendente-card">
+      <h2></h2>  
+      </a>
+
     </div>
   </div>
 

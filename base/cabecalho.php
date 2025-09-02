@@ -1,7 +1,12 @@
 <?php
-session_start();
+
 require_once '../conexaohost/conexao.php';
 include('../sessao/verifica_sessao.php');
+
+if (!isset($_SESSION['nome_usuario'])) {
+    header("Location: ../pglogin/pglogin.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

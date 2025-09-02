@@ -1,4 +1,4 @@
-<?php
+<?php       
 require_once '../conexaohost/conexao.php';
 include('../sessao/verifica_sessao.php');
 
