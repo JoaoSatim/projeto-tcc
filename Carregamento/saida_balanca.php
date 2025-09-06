@@ -73,7 +73,7 @@ $placas = $conn->query("SELECT placa FROM balanca_entrada");
     <!-- Visualização da câmera -->
     <div class="camera-box">
         <h2>Visualização da Balança</h2>
-        <img src="http://192.168.3.27:8080/video">
+        <img id="camera" src="camera.php" alt="Câmera não disponível">
     </div>
 </div>
 

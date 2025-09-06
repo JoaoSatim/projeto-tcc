@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     $stmt->bind_param("sssis", $marca, $placa, $motorista, $peso_entrada, $data_entrada);
     $stmt->execute();
 
-    // Redireciona para evitar reenvio ao atualizar
     header("Location: entrada_balanca.php?success=1");
     exit;
 }
@@ -39,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     .btn { padding: 12px; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; width: 100%; margin-top: 10px; }
     .btn-green { background: #4CAF50; color: #fff; }
     .btn-purple { background: #6a1b9a; color: #fff; }
-    .camera-box { background: #000; border-radius: 12px; padding: 10px; }
+    .camera-box { background: #000; border-radius: 12px; padding: 10px; text-align: center; }
     .camera-box h2 { color: #4CAF50; margin-bottom: 10px; }
     img { width: 100%; height: 400px; border-radius: 12px; object-fit: cover; }
   </style>
@@ -68,14 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
             <button type="submit" class="btn btn-green">🚚 Registrar Entrada</button>
         </form>
 
-        <!-- Botão de gerar canhoto -->
         <button onclick="imprimirCanhoto('entrada')" class="btn btn-purple">🧾 Gerar Canhoto</button>
     </div>
 
     <!-- Visualização da câmera -->
     <div class="camera-box">
         <h2>Visualização da Balança</h2>
-        <img src="http://192.168.3.27:8080/video">
+        <img id="camera" src="camera.php" alt="Câmera não disponível">
     </div>
 </div>
 
@@ -98,6 +96,12 @@ function imprimirCanhoto(tipo) {
     win.document.write(conteudo);
     win.print();
 }
+
+// Atualiza a imagem da câmera a cada 1s
+setInterval(() => {
+  const cam = document.getElementById("camera");
+  cam.src = "camera.php?" + new Date().getTime();
+}, 1000);
 </script>
 </body>
 </html>
