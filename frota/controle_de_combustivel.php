@@ -51,7 +51,7 @@ $historico = $conn->query("SELECT c.*, v.placa, v.modelo FROM controle_combustiv
   </style>
 </head>
 <body>
-<?php include '../base/estoque.php'; ?>
+<?php include '../base/cabecalho.php'; ?>
 
 <div class="container">
   <h2 class="titulo">Controle de Abastecimento</h2>

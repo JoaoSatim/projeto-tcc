@@ -1,0 +1,101 @@
+<?php
+require_once '../conexaohost/conexao.php';
+session_start();
+
+if (!isset($_SESSION['nome_usuario'])) {
+    header("Location: ../pglogin/pglogin.php");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['acao'] === 'registrar') {
+    $placa = $_POST['placa'];
+    $peso_saida = $_POST['peso_saida'];
+    $data_saida = date('Y-m-d H:i:s');
+
+    $sql = "INSERT INTO balanca_saida (placa, peso_saida, data_saida) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sis", $placa, $peso_saida, $data_saida);
+    $stmt->execute();
+
+    header("Location: saida_balanca.php?success=1");
+    exit;
+}
+
+// Buscar placas já registradas na entrada
+$placas = $conn->query("SELECT placa FROM balanca_entrada");
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Saída Balança</title>
+  <link rel="stylesheet" href="../css/estilo.css"/>
+  <style>
+    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px; }
+    .form-box { background: #1a1a1a; padding: 20px; border-radius: 12px; color: #fff; }
+    .form-box h2 { color: #f44336; margin-bottom: 15px; }
+    .form-box input, .form-box select { width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: none; }
+    .btn { padding: 12px; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; width: 100%; margin-top: 10px; }
+    .btn-red { background: #f44336; color: #fff; }
+    .btn-purple { background: #6a1b9a; color: #fff; }
+    .camera-box { background: #000; border-radius: 12px; padding: 10px; }
+    .camera-box h2 { color: #f44336; margin-bottom: 10px; }
+    img { width: 100%; height: 400px; border-radius: 12px; object-fit: cover; }
+  </style>
+</head>
+<body>
+<?php include '../base/cabecalho.php'; ?>
+
+<div class="layout">
+    <!-- Formulário de saída -->
+    <div class="form-box">
+        <h2>Registrar Saída</h2>
+        <form method="post">
+            <input type="hidden" name="acao" value="registrar">
+            <label>Selecionar Placa:</label>
+            <select name="placa" required>
+                <option value="">-- Selecione --</option>
+                <?php while($row = $placas->fetch_assoc()): ?>
+                    <option value="<?= $row['placa'] ?>"><?= $row['placa'] ?></option>
+                <?php endwhile; ?>
+            </select>
+
+            <label>Peso Saída (kg):</label>
+            <input type="number" name="peso_saida" placeholder="00000" required>
+
+            <button type="submit" class="btn btn-red">🚛 Registrar Saída</button>
+        </form>
+
+        <!-- Botão de gerar canhoto -->
+        <button onclick="imprimirCanhoto('saida')" class="btn btn-purple">🧾 Gerar Canhoto</button>
+    </div>
+
+    <!-- Visualização da câmera -->
+    <div class="camera-box">
+        <h2>Visualização da Balança</h2>
+        <img src="http://192.168.3.27:8080/video">
+    </div>
+</div>
+
+<script>
+function imprimirCanhoto(tipo) {
+    let conteudo = `
+        <div style="font-family: Arial; padding:20px; border:1px solid #000; width:500px;">
+            <h2 style="text-align:center;">Canhoto de ${tipo === 'entrada' ? 'Entrada' : 'Saída'}</h2>
+            <p><b>Empresa:</b> FERTIQUIM Fertilizantes</p>
+            <p><b>Data:</b> ${new Date().toLocaleString()}</p>
+            <p><b>Motorista:</b> __________________________</p>
+            <p><b>Caminhão:</b> __________________________</p>
+            <p><b>Placa:</b> __________________________</p>
+            <p><b>Peso:</b> __________________________</p>
+            <br><br>
+            <p>Assinatura: _______________________________</p>
+        </div>
+    `;
+    let win = window.open('', '', 'height=600,width=800');
+    win.document.write(conteudo);
+    win.print();
+}
+</script>
+</body>
+</html>

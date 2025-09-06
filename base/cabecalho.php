@@ -1,7 +1,7 @@
 <?php
 
 require_once '../conexaohost/conexao.php';
-include('../sessao/verifica_sessao.php');
+
 
 if (!isset($_SESSION['nome_usuario'])) {
     header("Location: ../pglogin/pglogin.php");
@@ -21,6 +21,7 @@ if (!isset($_SESSION['nome_usuario'])) {
     <h1>FERTIQUIM Fertilizantes</h1>
     <nav>
       <a href="../pginicial/pginicial.php">Início</a>
+      <a href="../admin/dashboard_admin.php">Painel Administrador</a>
       <a href="../pglogin/pglogin.php">Sair</a>
     </nav>
   </header>

@@ -1,5 +1,6 @@
 <?php
-require_once '../conexaohost/conexao.php';
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

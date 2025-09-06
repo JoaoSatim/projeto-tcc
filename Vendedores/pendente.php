@@ -53,8 +53,25 @@ function toggleItens(id) {
 }
 
 function aprovarVenda(id) {
-    if(confirm('Deseja aprovar esta venda?')){
-        fetch('aprovar_venda.php?id_venda=' + id)
+    const formas = ["Crédito", "Débito", "Dinheiro", "Pix", "Cheque"];
+    let opcoes = "Escolha a forma de pagamento:\n";
+    formas.forEach((f, idx) => {
+        opcoes += (idx+1) + " - " + f + "\n";
+    });
+
+    let escolha = prompt(opcoes);
+    if(!escolha) return;
+
+    escolha = parseInt(escolha);
+    if(escolha < 1 || escolha > formas.length){
+        alert("Opção inválida!");
+        return;
+    }
+
+    const forma_pagamento = formas[escolha-1];
+
+    if(confirm(`Aprovar esta venda com pagamento: ${forma_pagamento}?`)){
+        fetch('aprovar_venda.php?id_venda=' + id + '&forma_pagamento=' + encodeURIComponent(forma_pagamento))
         .then(res => res.text())
         .then(res => { alert(res); location.reload(); });
     }
@@ -123,6 +140,9 @@ function filtrarStatus(select){
         <span class="status <?php echo $v['status']=='aprovada' ? 'status-aprovada':'status-pendente'; ?>">
           <?php echo ucfirst($v['status']); ?>
         </span>
+        <?php if($v['status']=='aprovada' && !empty($v['forma_pagamento'])): ?>
+          <br><small><?php echo $v['forma_pagamento']; ?></small>
+        <?php endif; ?>
       </td>
       <td>
         <button class="btn btn-expand" onclick="toggleItens(<?php echo $v['id_venda']; ?>)">Itens</button>

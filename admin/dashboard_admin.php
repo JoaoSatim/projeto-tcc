@@ -129,7 +129,7 @@ if($resTipos){
 </style>
 </head>
 <body>
-<?php include '../base/cabecalho.php'; ?>
+<?php include '../base/administrador.php'; ?>
 
 <div class="container">
 <h2 class="titulo">Dashboard Financeiro</h2>

@@ -4,7 +4,7 @@ session_start();
 
 // Receber dados da venda
 $numero_venda   = $_POST['numero_venda'];
-$cliente        = $_POST['nome']; // vem do hidden que adicionamos
+$cliente        = $_POST['nome']; 
 $cpf_cnpj       = $_POST['tipo_cpf_cnpj'];
 $telefone       = $_POST['telefone'];
 $endereco       = $_POST['endereco'];
@@ -17,8 +17,8 @@ $conn->begin_transaction();
 try {
     // Inserir venda
     $sqlVenda = "INSERT INTO vendas 
-        (numero_venda, cliente, cpf_cnpj, telefone, endereco, cep, responsavel, data_venda)
-        VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
+        (numero_venda, cliente, cpf_cnpj, telefone, endereco, cep, responsavel, data_venda, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), 'pendente')";
 
     $stmt = $conn->prepare($sqlVenda);
     if(!$stmt){
@@ -59,7 +59,7 @@ try {
     // Confirmar
     $conn->commit();
 
-    echo "<script>alert('Venda salva com sucesso!'); window.location.href='vendas_sacaria.php';</script>";
+    echo "<script>alert('Venda salva com sucesso!'); window.location.href='pendente.php';</script>";
 
 } catch (Exception $e) {
     $conn->rollback();

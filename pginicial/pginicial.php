@@ -17,13 +17,9 @@ if (!isset($_SESSION['nome_usuario'])) {
 
 </head>
 <body>
-  <header>
-    <h1>FERTIQUIM Fertilizantes</h1>
-    <nav>
-      <a href="pginicial.php">Início</a>
-      <a href="../pglogin/pglogin.php">Sair</a>
-    </nav>
-  </header>
+  <?php 
+  include '../base/cabecalho.php';
+  ?>
 
   <div class="container">
     <h2 class="titulo">Painel Principal</h2>
@@ -40,7 +36,7 @@ if (!isset($_SESSION['nome_usuario'])) {
       <a href="../estoque/estoquevisu.php" class="card almoxarifado-card">
         <h2></h2>
       </a>
-      <a href="../manutencao/manutencao.php" class="card carregamento-card">
+      <a href="../carregamento/carregamento.php" class="card carregamento-card">
         <h2></h2>
       </a>
     </div>

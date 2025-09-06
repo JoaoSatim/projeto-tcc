@@ -38,7 +38,7 @@ $result = $conn->query("SELECT * FROM frota_veiculos ORDER BY data_cadastro DESC
   </style>
 </head>
 <body>
-<?php include '../base/estoque.php'; ?>
+<?php include '../base/cabecalho.php'; ?>
 
 <div class="container">
   <h2 class="titulo">Cadastro de Veículos</h2>

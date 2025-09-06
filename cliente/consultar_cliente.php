@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../conexaohost/conexao.php';
 include '../base/cabecalho.php';
 

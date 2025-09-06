@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once '../conexaohost/conexao.php';
-
 
 // Buscar último número de venda
 $sqlUltima = "SELECT MAX(numero_venda) as ultima FROM vendas";
@@ -100,6 +100,13 @@ while($row = $resProdutos->fetch_assoc()){
           <input type="text" name="responsavel_entrega" value="<?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>" readonly>
         </div>
       </div>
+
+      <!-- Hidden inputs para enviar ao processa_nf.php -->
+      <input type="hidden" name="nome" id="nome_cliente">
+      <input type="hidden" name="tipo_cpf_cnpj" id="hidden_cpf_cnpj">
+      <input type="hidden" name="telefone" id="hidden_telefone">
+      <input type="hidden" name="endereco" id="hidden_endereco">
+      <input type="hidden" name="cep" id="hidden_cep">
     </div>
 
     <div class="form-section">
@@ -223,6 +230,13 @@ function preencherCliente(select){
   document.getElementById('telefone').value = opt.getAttribute('data-tel');
   document.getElementById('endereco').value = opt.getAttribute('data-endereco');
   document.getElementById('cep').value = opt.getAttribute('data-cep');
+
+  // hidden para enviar ao PHP
+  document.getElementById('nome_cliente').value = opt.text;
+  document.getElementById('hidden_cpf_cnpj').value = opt.getAttribute('data-cpf');
+  document.getElementById('hidden_telefone').value = opt.getAttribute('data-tel');
+  document.getElementById('hidden_endereco').value = opt.getAttribute('data-endereco');
+  document.getElementById('hidden_cep').value = opt.getAttribute('data-cep');
 }
 </script>
 </body>

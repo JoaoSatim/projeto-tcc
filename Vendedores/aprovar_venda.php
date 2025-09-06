@@ -7,14 +7,19 @@ if(!isset($_GET['id_venda'])){
 }
 
 $id_venda = intval($_GET['id_venda']);
+$forma_pagamento = $_GET['forma_pagamento'] ?? '';
 
-// Atualizar status para 'aprovada'
-$sql = "UPDATE vendas SET status = 'aprovada' WHERE id_venda = ?";
+if(empty($forma_pagamento)){
+    die("Forma de pagamento não informada.");
+}
+
+// Atualizar status e salvar forma de pagamento
+$sql = "UPDATE vendas SET status = 'aprovada', forma_pagamento = ? WHERE id_venda = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id_venda);
+$stmt->bind_param("si", $forma_pagamento, $id_venda);
 
 if($stmt->execute()){
-    echo "Venda aprovada com sucesso!";
+    echo "Venda aprovada com pagamento: $forma_pagamento";
 }else{
     echo "Erro ao aprovar venda: " . $conn->error;
 }

@@ -63,18 +63,7 @@ if ($funcionario_id) {
 </head>
 <body>
 
-<header>
-  <h1>FERTIQUIM Fertilizantes</h1>
-  <nav>
-    <a href="../pginicial/pginicial.php">Início</a>
-    <a href="inv.php">Inventário</a>
-    <a href="../estoque/estoque.php">Controle</a>
-    <a href="../nf/inserir.php">Inserir NF's</a>
-    <a href="../nf/consultar.php">Consultar NF's</a>
-    <a href="../nf/pendente.php">NF's Pendente</a>  
-    <a href="../pglogin/pglogin.php">Sair</a>
-  </nav>
-</header>
+<?php include '../base/estoque.php'; ?>
 
 <div class="container">
   <h2 class="titulo">Consulta de Inventário por Funcionário</h2>

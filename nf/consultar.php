@@ -79,18 +79,7 @@ function toggleExpand(id) {
 </script>
 </head>
 <body>
-<header>
-    <h1>Notas Fiscais Aceitas</h1>
-    <nav>
-    <a href="../pginicial/pginicial.php">Início</a>
-    <a href="../inventario/inv.php">Inventário</a>
-    <a href="../estoque/estoque.php">Controle</a>
-    <a href="../nf/inserir.php">Inserir NF's</a>
-    <a href="../nf/consultar.php">Consultar NF's</a>
-    <a href="../nf/pendente.php">NF's Pendente</a>  
-    <a href="../pglogin/pglogin.php">Sair</a>
-    </nav>
-</header>
+<?php include '../base/estoque.php'; ?>
 
 <div class="container">
     <form method="get" class="search-box">

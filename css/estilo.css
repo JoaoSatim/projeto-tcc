@@ -310,3 +310,13 @@ footer {
   color: #fff;
   border-left: 8px solid transparent;
 }
+.entrada_balanca-card {
+  background: url('../img/entrada_balanca.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
+.saida_balanca-card {
+  background: url('../img/saida_balanca.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}

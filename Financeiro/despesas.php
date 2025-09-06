@@ -139,6 +139,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <option value="Diária">Diária</option>
         <option value="Locação">Locação</option>
         <option value="Salário">Salário</option>
+        <option value="Material de Construção">Material de Construção</option>
+        <option value="Manutenção de Veículo">Manutenção de Veículo</option>
 
       </select>
 
