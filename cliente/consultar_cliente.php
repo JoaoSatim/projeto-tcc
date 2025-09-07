@@ -117,8 +117,8 @@ $res = $conn->query($sql);
               <strong>Tipo:</strong> <?php echo $row['tipo_pessoa']; ?><br>
               <strong>RG/IE:</strong> <?php echo $row['rg_ie']; ?><br>
               <strong>Data Nasc.:</strong> <?php echo $row['data_nascimento']; ?><br>
-              <strong>Telefone:</strong> <?php echo $row['telefone']; ?><br>
-              <strong>Celular:</strong> <?php echo $row['celular']; ?><br>
+              <strong>Celular:</strong> <?php echo $row['telefone']; ?><br>
+              <strong>Telefone:</strong> <?php echo $row['celular']; ?><br>
               <strong>Email:</strong> <?php echo $row['email']; ?><br>
               <strong>Endereço:</strong> <?php echo $row['endereco'] . ', ' . $row['numero']; ?><br>
               <strong>Complemento:</strong> <?php echo $row['complemento']; ?><br><br>

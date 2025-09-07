@@ -66,8 +66,8 @@ $placas = $conn->query("SELECT placa FROM balanca_entrada");
             <button type="submit" class="btn btn-red">🚛 Registrar Saída</button>
         </form>
 
-        <!-- Botão de gerar canhoto -->
-        <button onclick="imprimirCanhoto('saida')" class="btn btn-purple">🧾 Gerar Canhoto</button>
+        <!-- Botão para ir até a página de canhotos -->
+        <button onclick="window.location.href='canhotos_salvos.php'" class="btn btn-purple">🧾 Ver Canhotos</button>
     </div>
 
     <!-- Visualização da câmera -->
@@ -78,24 +78,11 @@ $placas = $conn->query("SELECT placa FROM balanca_entrada");
 </div>
 
 <script>
-function imprimirCanhoto(tipo) {
-    let conteudo = `
-        <div style="font-family: Arial; padding:20px; border:1px solid #000; width:500px;">
-            <h2 style="text-align:center;">Canhoto de ${tipo === 'entrada' ? 'Entrada' : 'Saída'}</h2>
-            <p><b>Empresa:</b> FERTIQUIM Fertilizantes</p>
-            <p><b>Data:</b> ${new Date().toLocaleString()}</p>
-            <p><b>Motorista:</b> __________________________</p>
-            <p><b>Caminhão:</b> __________________________</p>
-            <p><b>Placa:</b> __________________________</p>
-            <p><b>Peso:</b> __________________________</p>
-            <br><br>
-            <p>Assinatura: _______________________________</p>
-        </div>
-    `;
-    let win = window.open('', '', 'height=600,width=800');
-    win.document.write(conteudo);
-    win.print();
-}
+// Atualiza a imagem da câmera a cada 1s
+setInterval(() => {
+  const cam = document.getElementById("camera");
+  cam.src = "camera.php?" + new Date().getTime();
+}, 1000);
 </script>
 </body>
 </html>

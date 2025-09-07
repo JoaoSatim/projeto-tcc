@@ -17,7 +17,7 @@ session_start();
   <div class="container">
     <h2 class="titulo">Painel Principal</h2>
     <div class="cards">
-      <a href="../manutencao/manutencao.php"" class="card VendasInternas-card">
+      <a href="vendas_tonelada.php"" class="card VendasInternas-card">
         <h2></h2>
       </a>
       <a href="vendas_sacaria.php" class="card VendasExternas-card">

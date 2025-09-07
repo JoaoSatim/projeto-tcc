@@ -134,6 +134,7 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
       <option value="Saca 50kg">Sacaria</option>
       <option value="Materiais Elétricos">Materiais elétricos</option>
       <option value="Materiais de Consumo">Materiais de Consumo</option>
+      <option value="BigBag">BigBag</option>
     </select>
 
     <button type="submit" name="adicionar">Adicionar</button>

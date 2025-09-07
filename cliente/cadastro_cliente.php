@@ -64,11 +64,11 @@ session_start();
       <h2>Contato</h2>
       <div class="form-row">
         <div class="form-group">
-          <label>Telefone:</label>
+          <label>Celular:</label>
           <input type="text" name="telefone" required>
         </div>
         <div class="form-group">
-          <label>Celular:</label>
+          <label>Telefone:</label>
           <input type="text" name="celular">
         </div>
         <div class="form-group">

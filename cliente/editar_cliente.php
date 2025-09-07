@@ -1,5 +1,7 @@
 <?php
+session_start();
 require_once '../conexaohost/conexao.php';
+
 
 // Verifica se recebeu o ID
 if (!isset($_GET['id'])) {
