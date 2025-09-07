@@ -2,7 +2,7 @@
 require_once '../conexaohost/conexao.php';
 include('../sessao/verifica_sessao.php');
 
-restringirAcesso(['Almoxarifado', 'Administrador', 'Proprietario']);
+restringirAcesso(['Almoxarifado', 'Administrador', 'Vendedor']);
 
 // Filtros
 $nome = $_GET['nome_produto'] ?? '';
@@ -124,5 +124,6 @@ document.getElementById('select-all').addEventListener('click', function(){
 </script>
 
 <?php include '../base/rodape.php'; ?>
+  <?php include '../avisos/avisos_estoque.php'; ?>
 </body>
 </html>

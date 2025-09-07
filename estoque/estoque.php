@@ -32,8 +32,17 @@ if (isset($_POST['adicionar'])) {
     exit;
 }
 
-// Remover produto
+// Remover produto (apenas administrador)
 if (isset($_GET['remover'])) {
+    $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
+    if (strtolower(trim($tipo_usuario)) !== 'administrador') {
+        echo "<script>
+                alert('Você não tem permissão para remover este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
+                window.location.href='estoque.php';
+              </script>";
+        exit;
+    }
+
     $id = intval($_GET['remover']);
     $conn->query("DELETE FROM estoque_fertilizantes WHERE id = $id");
     header("Location: estoque.php");
@@ -42,12 +51,30 @@ if (isset($_GET['remover'])) {
 
 // Editar produto (carregar dados)
 if (isset($_GET['editar'])) {
+    $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
+    if (strtolower(trim($tipo_usuario)) !== 'administrador') {
+        echo "<script>
+                alert('Você não tem permissão para editar este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
+                window.location.href='estoque.php';
+              </script>";
+        exit;
+    }
+
     $id = intval($_GET['editar']);
     $editar = $conn->query("SELECT * FROM estoque_fertilizantes WHERE id = $id")->fetch_assoc();
 }
 
 // Atualizar produto (nome e quantidade)
 if (isset($_POST['atualizar'])) {
+    $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
+    if (strtolower(trim($tipo_usuario)) !== 'administrador') {
+        echo "<script>
+                alert('Você não tem permissão para atualizar este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
+                window.location.href='estoque.php';
+              </script>";
+        exit;
+    }
+
     $id = intval($_POST['id']);
     $nome = $_POST['nome'];
     $quantidade = floatval($_POST['quantidade']);
@@ -111,6 +138,12 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
 
     .editar-form button:hover {
       background: #689f38;
+    }
+
+    .link-desativado {
+      color: #888;
+      cursor: not-allowed;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -181,8 +214,15 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
           <td><?php echo date('d/m/Y H:i', strtotime($row['data_atualizacao'])); ?></td>
           <td><?php echo $row['usuario']; ?></td>
           <td>
-            <a href="?editar=<?php echo $row['id']; ?>">Editar</a> | 
-            <a href="?remover=<?php echo $row['id']; ?>" onclick="return confirm('Remover este item?')">Remover</a>
+<?php 
+$tipo_usuario = $_SESSION['funcao_usuario'] ?? ''; 
+if (strtolower(trim($tipo_usuario)) === 'administrador') { ?>
+  <a href="?editar=<?php echo $row['id']; ?>">Editar</a> | 
+  <a href="?remover=<?php echo $row['id']; ?>" onclick="return confirm('Remover este item?')">Remover</a>
+<?php } else { ?>
+  <span class="link-desativado">Editar</span> | 
+  <span class="link-desativado">Remover</span>
+<?php } ?>
           </td>
         </tr>
       <?php } ?>

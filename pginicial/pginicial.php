@@ -14,7 +14,6 @@ if (!isset($_SESSION['nome_usuario'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fertiquim - Sistema</title>
   <link rel="stylesheet" href="../css/estilo.css" />
-
 </head>
 <body>
   <?php 
@@ -51,5 +50,9 @@ if (!isset($_SESSION['nome_usuario'])) {
       <?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>
     </div>
   <?php endif; ?>
+
+  <!-- Avisos -->
+  <?php include '../avisos/avisos.php'; ?>
+
 </body>
 </html>
