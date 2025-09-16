@@ -14,7 +14,7 @@ if ($tipo === 'entrada') {
     $sql = "SELECT id, marca, placa, motorista, peso_entrada, data_entrada AS data_registro 
             FROM balanca_entrada WHERE id = ?";
 } else {
-    $sql = "SELECT id, placa, peso_saida, data_saida AS data_registro 
+    $sql = "SELECT id, placa, produto, peso_saida, destino, data_saida AS data_registro 
             FROM balanca_saida WHERE id = ?";
 }
 
@@ -29,6 +29,8 @@ $pesoEntrada = 0;
 $pesoSaida   = 0;
 $marca       = "-";
 $motorista   = "-";
+$produto     = $dados['produto'] ?? "-";
+$destino     = $dados['destino'] ?? "-";
 
 // Se for entrada
 if ($tipo === 'entrada') {
@@ -55,7 +57,7 @@ else {
 }
 
 $pesoSaida = $dados['peso_saida'] ?? $pesoSaida;
-$tara = ($pesoEntrada && $pesoSaida) ? ($pesoEntrada - $pesoSaida) : 0;
+$tara = ($pesoEntrada && $pesoSaida) ? abs($pesoEntrada - $pesoSaida) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -102,6 +104,10 @@ $tara = ($pesoEntrada && $pesoSaida) ? ($pesoEntrada - $pesoSaida) : 0;
     <p><b>Marca:</b> <?= $marca ?></p>
     <p><b>Placa:</b> <?= $dados['placa'] ?></p>
     <p><b>Motorista:</b> <?= $motorista ?></p>
+    <?php if ($tipo === 'saida'): ?>
+      <p><b>Produto:</b> <?= $produto ?></p>
+      <p><b>Destino:</b> <?= $destino ?></p>
+    <?php endif; ?>
     <p><b>Peso Entrada:</b> <?= number_format($pesoEntrada, 0, ',', '.') ?> kg</p>
     <p><b>Peso Saída:</b> <?= number_format($pesoSaida, 0, ',', '.') ?> kg</p>
     <p><b>Tara:</b> <?= number_format($tara, 0, ',', '.') ?> kg</p>

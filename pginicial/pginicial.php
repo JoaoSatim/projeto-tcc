@@ -38,6 +38,9 @@ if (!isset($_SESSION['nome_usuario'])) {
       <a href="../carregamento/carregamento.php" class="card carregamento-card">
         <h2></h2>
       </a>
+      <a href="../deposito/deposito.php" class="card deposito-card">
+      <h2></h2>
+      </a>
     </div>
   </div>
 

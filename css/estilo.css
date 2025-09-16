@@ -320,3 +320,8 @@ footer {
   color: #fff;
   border-left: 8px solid transparent;
 }
+.deposito-card {
+  background: url('../img/deposito.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}

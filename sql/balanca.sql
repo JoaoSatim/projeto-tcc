@@ -13,3 +13,5 @@ CREATE TABLE balanca_saida (
     peso_saida INT,
     data_saida DATETIME
 );
+
+ALTER TABLE balanca_saida ADD COLUMN destino VARCHAR(255) AFTER peso_saida;

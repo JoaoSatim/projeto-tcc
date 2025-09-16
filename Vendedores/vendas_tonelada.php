@@ -18,8 +18,8 @@ $resClientes = $conn->query($sqlClientes);
 
 // Buscar produtos do estoque (apenas Saca 50kg)
 $sqlProdutos = "SELECT id, nome_produto, unidade, tipo 
-                FROM estoque_fertilizantes 
-                WHERE tipo = 'BigBag'
+                FROM deposito 
+                WHERE tipo = 'toneladas/BigBag'
                 ORDER BY nome_produto";
 $resProdutos = $conn->query($sqlProdutos);
 

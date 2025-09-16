@@ -2,6 +2,9 @@
 require_once '../conexaohost/conexao.php';
 session_start();
 
+// 🔧 Força o fuso horário para evitar data/hora errada
+date_default_timezone_set('America/Sao_Paulo');
+
 if (!isset($_SESSION['nome_usuario'])) {
     header("Location: ../pglogin/pglogin.php");
     exit;
@@ -9,12 +12,15 @@ if (!isset($_SESSION['nome_usuario'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['acao'] === 'registrar') {
     $placa = $_POST['placa'];
+    $produto = $_POST['produto'];
     $peso_saida = $_POST['peso_saida'];
-    $data_saida = date('Y-m-d H:i:s');
+    $destino = $_POST['destino'];
 
-    $sql = "INSERT INTO balanca_saida (placa, peso_saida, data_saida) VALUES (?, ?, ?)";
+    // ✅ Agora com campo destino
+    $sql = "INSERT INTO balanca_saida (placa, produto, peso_saida, destino, data_saida) 
+            VALUES (?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sis", $placa, $peso_saida, $data_saida);
+    $stmt->bind_param("ssis", $placa, $produto, $peso_saida, $destino);
     $stmt->execute();
 
     header("Location: saida_balanca.php?success=1");
@@ -52,6 +58,7 @@ $placas = $conn->query("SELECT placa FROM balanca_entrada");
         <h2>Registrar Saída</h2>
         <form method="post">
             <input type="hidden" name="acao" value="registrar">
+            
             <label>Selecionar Placa:</label>
             <select name="placa" required>
                 <option value="">-- Selecione --</option>
@@ -60,8 +67,14 @@ $placas = $conn->query("SELECT placa FROM balanca_entrada");
                 <?php endwhile; ?>
             </select>
 
+            <label>Produto:</label>
+            <input type="text" name="produto" placeholder="Digite o produto" required>
+
             <label>Peso Saída (kg):</label>
             <input type="number" name="peso_saida" placeholder="00000" required>
+
+            <label>Destino do Caminhão:</label>
+            <input type="text" name="destino" placeholder="Digite o destino" required>
 
             <button type="submit" class="btn btn-red">🚛 Registrar Saída</button>
         </form>
@@ -78,7 +91,6 @@ $placas = $conn->query("SELECT placa FROM balanca_entrada");
 </div>
 
 <script>
-// Atualiza a imagem da câmera a cada 1s
 setInterval(() => {
   const cam = document.getElementById("camera");
   cam.src = "camera.php?" + new Date().getTime();
