@@ -106,14 +106,16 @@ if (!isset($_SESSION['nome_usuario'])) {
             <div class="form-group">
               <label>Tipo:</label>
               <select name="fertilizante_tipo[]" required>
-                <option value="">Selecione</option>
-                <option value="Material de informática">Material de informática</option>
-                <option value="Ferramentas">Ferramentas</option>
-                <option value="Matéria-prima">Matéria-prima</option>
-                <option value="Material de Escritorio">Material de Escritório</option>
-                <option value="EPI">EPi's</option>
-                <option value="Materiais Elétricos">Materiais elétricos</option>
-                <option value="Materiais de Consumo">Materiais de Consumo</option>
+                  <option value="">Selecione</option>
+                  <option value="Material de informática">Material de informática</option>
+                  <option value="Ferramentas">Ferramentas</option>
+                  <option value="Matéria-prima">Matéria-prima</option>
+                  <option value="Material de Escritorio">Material de Escritório</option>
+                  <option value="EPI">EPi's</option>
+                  <option value="Saca 50kg">Sacaria</option>
+                  <option value="Materiais Elétricos">Materiais elétricos</option>
+                  <option value="Materiais de Consumo">Materiais de Consumo</option>
+                  <option value="BigBag">BigBag</option>
               </select>
             </div>
             <button type="button" class="remove-btn" onclick="removeFertilizante(this)">Remover</button>
@@ -156,10 +158,16 @@ if (!isset($_SESSION['nome_usuario'])) {
         <div class="form-group">
           <label>Tipo:</label>
           <select name="fertilizante_tipo[]" required>
-            <option value="">Selecione</option>
-            <option value="Material de informática">Material de informática</option>
-            <option value="Ferramentas">Ferramentas</option>
-            <option value="Matéria-prima">Matéria-prima</option>
+                  <option value="">Selecione</option>
+                  <option value="Material de informática">Material de informática</option>
+                  <option value="Ferramentas">Ferramentas</option>
+                  <option value="Matéria-prima">Matéria-prima</option>
+                  <option value="Material de Escritorio">Material de Escritório</option>
+                  <option value="EPI">EPi's</option>
+                  <option value="Saca 50kg">Sacaria</option>
+                  <option value="Materiais Elétricos">Materiais elétricos</option>
+                  <option value="Materiais de Consumo">Materiais de Consumo</option>
+                  <option value="BigBag">BigBag</option>
           </select>
         </div>
         <button type="button" class="remove-btn" onclick="removeFertilizante(this)">Remover</button>

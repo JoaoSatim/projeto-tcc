@@ -2,7 +2,7 @@
 require_once '../conexaohost/conexao.php';
 include('../sessao/verifica_sessao.php');
 
-restringirAcesso(['Administrador', 'Proprietario', 'Frota']);
+restringirAcesso(['Administrador', 'Proprietario', 'Gerencia']);
 
 // Recebe parâmetros
 $veiculo_id = intval($_GET['veiculo_id'] ?? 0);

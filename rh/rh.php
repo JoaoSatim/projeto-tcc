@@ -4,7 +4,7 @@ session_start();
 
 include('../sessao/verifica_sessao.php');
 
-restringirAcesso(['Recursos Humanos', 'Administrador', 'Proprietario']);
+restringirAcesso(['Gerencia', 'Administrador', 'Proprietario']);
 
 ?>
 <!DOCTYPE html>

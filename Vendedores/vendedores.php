@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+include('../sessao/verifica_sessao.php');
+restringirAcesso(['Administrador', 'Proprietario', 'Gerencia']);
 
 ?>
 <!DOCTYPE html>

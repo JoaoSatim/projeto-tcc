@@ -11,13 +11,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     $marca = $_POST['marca'];
     $placa = $_POST['placa'];
     $motorista = $_POST['motorista'];
+    $cpf_motorista = $_POST['cpf_motorista'];
     $peso_entrada = $_POST['peso_entrada'];
     $data_entrada = date('Y-m-d H:i:s');
 
-    $sql = "INSERT INTO balanca_entrada (marca, placa, motorista, peso_entrada, data_entrada) 
-            VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO balanca_entrada (marca, placa, motorista, cpf_motorista, peso_entrada, data_entrada) 
+            VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssis", $marca, $placa, $motorista, $peso_entrada, $data_entrada);
+    $stmt->bind_param("ssssis", $marca, $placa, $motorista, $cpf_motorista, $peso_entrada, $data_entrada);
     $stmt->execute();
 
     header("Location: entrada_balanca.php?success=1");
@@ -51,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         <h2>Registrar Entrada</h2>
         <form method="post">
             <input type="hidden" name="acao" value="registrar">
+            
             <label>Marca do Caminhão:</label>
             <input type="text" name="marca" placeholder="Ex: Scania" required>
 
@@ -59,6 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 
             <label>Motorista:</label>
             <input type="text" name="motorista" placeholder="Nome do motorista" required>
+
+            <label>CPF do Motorista:</label>
+            <input type="text" name="cpf_motorista" placeholder="000.000.000-00" required>
 
             <label>Peso Entrada (kg):</label>
             <input type="number" name="peso_entrada" placeholder="00000" required>

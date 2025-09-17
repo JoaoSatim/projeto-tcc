@@ -3,7 +3,7 @@ require_once '../conexaohost/conexao.php';
 session_start();
 
 include('../sessao/verifica_sessao.php');
-restringirAcesso(['Recursos Humanos', 'Administrador', 'Proprietario']);
+restringirAcesso(['Gerencia', 'Administrador', 'Proprietario']);
 
 if (!isset($_SESSION['nome_usuario'])) {
     header("Location: ../pglogin/pglogin.php");

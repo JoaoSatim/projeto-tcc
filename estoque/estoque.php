@@ -35,7 +35,7 @@ if (isset($_POST['adicionar'])) {
 // Remover produto (apenas administrador)
 if (isset($_GET['remover'])) {
     $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
-    if (strtolower(trim($tipo_usuario)) !== 'administrador') {
+    if (strtolower(trim($tipo_usuario)) !== 'Gerencia' && 'Administrador') {
         echo "<script>
                 alert('Você não tem permissão para remover este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
                 window.location.href='estoque.php';
@@ -52,7 +52,7 @@ if (isset($_GET['remover'])) {
 // Editar produto (carregar dados)
 if (isset($_GET['editar'])) {
     $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
-    if (strtolower(trim($tipo_usuario)) !== 'administrador') {
+    if (strtolower(trim($tipo_usuario)) !== 'Gerencia' && 'Administrador') {
         echo "<script>
                 alert('Você não tem permissão para editar este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
                 window.location.href='estoque.php';
@@ -67,7 +67,7 @@ if (isset($_GET['editar'])) {
 // Atualizar produto (nome e quantidade)
 if (isset($_POST['atualizar'])) {
     $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
-    if (strtolower(trim($tipo_usuario)) !== 'administrador') {
+    if (strtolower(trim($tipo_usuario)) !== 'Gerencia' && 'Administrador') {
         echo "<script>
                 alert('Você não tem permissão para atualizar este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
                 window.location.href='estoque.php';
