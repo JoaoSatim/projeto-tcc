@@ -2,7 +2,7 @@
 require_once '../conexaohost/conexao.php';
 include('../sessao/verifica_sessao.php');
 
-restringirAcesso(['Almoxarifado', 'Administrador', 'Vendedor']);
+restringirAcesso(['Almoxarifado', 'Administrador', 'Gerencia']);
 
 // Filtros
 $nome = $_GET['nome_produto'] ?? '';

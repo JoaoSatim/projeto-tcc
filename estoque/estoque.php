@@ -32,10 +32,16 @@ if (isset($_POST['adicionar'])) {
     exit;
 }
 
+  function temPermissao($tipo_usuario) {
+    $tipo = strtolower(trim($tipo_usuario));
+    return ($tipo === 'gerencia' || $tipo === 'administrador');
+}
+
+
 // Remover produto (apenas administrador)
 if (isset($_GET['remover'])) {
     $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
-    if (strtolower(trim($tipo_usuario)) !== 'Gerencia' && 'Administrador') {
+    if (!temPermissao($tipo_usuario)) {
         echo "<script>
                 alert('Você não tem permissão para remover este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
                 window.location.href='estoque.php';
@@ -52,7 +58,7 @@ if (isset($_GET['remover'])) {
 // Editar produto (carregar dados)
 if (isset($_GET['editar'])) {
     $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
-    if (strtolower(trim($tipo_usuario)) !== 'Gerencia' && 'Administrador') {
+    if (!temPermissao($tipo_usuario)){
         echo "<script>
                 alert('Você não tem permissão para editar este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
                 window.location.href='estoque.php';
@@ -67,7 +73,7 @@ if (isset($_GET['editar'])) {
 // Atualizar produto (nome e quantidade)
 if (isset($_POST['atualizar'])) {
     $tipo_usuario = $_SESSION['funcao_usuario'] ?? '';
-    if (strtolower(trim($tipo_usuario)) !== 'Gerencia' && 'Administrador') {
+    if (!temPermissao($tipo_usuario)){
         echo "<script>
                 alert('Você não tem permissão para atualizar este item. Solicite um chamado para TI_Fertiquim@gmail.com.');
                 window.location.href='estoque.php';
@@ -216,7 +222,7 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
           <td>
 <?php 
 $tipo_usuario = $_SESSION['funcao_usuario'] ?? ''; 
-if (strtolower(trim($tipo_usuario)) === 'administrador') { ?>
+if (temPermissao($tipo_usuario)){ ?>
   <a href="?editar=<?php echo $row['id']; ?>">Editar</a> | 
   <a href="?remover=<?php echo $row['id']; ?>" onclick="return confirm('Remover este item?')">Remover</a>
 <?php } else { ?>

@@ -23,7 +23,7 @@ if (!isset($_SESSION['nome_usuario'])) {
   <header>
     <h1>FERTIQUIM Fertilizantes</h1>
     <nav>
-      <a href="pginicial.php">Início</a>
+      <a href="../pginicial/pginicial.php">Início</a>
       <a href="../pglogin/pglogin.php">Sair</a>
     </nav>
   </header>
