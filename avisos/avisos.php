@@ -2,20 +2,28 @@
 
 $aviso = "🚀 Nova versão do sistema disponível! 
 
-            *Correção e ajuste no setor de vendas!
+            *Alguns Ajustes visuais realizados
 
-            *Ajustes realizados para controle da balança!
+            *Ajustes de desing!
 
-            *Ajuste no layout do canhoto de vendas!
+            *Inserção de Extrato no setor Administrador
 
-            *Ajuste no Canhoto da Balança!
+            FUTUROS AJUSTES A SEREM REALIZADOS
 
-            *Liberado lançamentos de vendas 
-            BigBag e Sacarias
+            *Novos Ajustes Visuais estão sendo implementados 
+            com a principal ideia de deixar o sistema mais fluido
 
-            *Liberado Controle de Gastos e Entradas para administrador
+            *Ajustes no controle de estoque visual e operacional
+            
+            *Serão adicionados mais opções de relatórios no estoque 
+            dando mais opções de impressão
 
-            *Configurado Camera da Balança
+            *Solicito por gentileza para enviarem sugestões de melhorias
+            1x por semana do sistema, o mesmo voltou recentemente a ser atualizado
+            desde já agradecido
+
+
+            * Email para contato : joao.v.s.satim@gmail.com 
             ";
 ?>
 
