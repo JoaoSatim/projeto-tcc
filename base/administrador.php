@@ -21,7 +21,8 @@ if (!isset($_SESSION['nome_usuario'])) {
     <nav>
       <a href="../pginicial/pginicial.php">Início</a>
       <a href="../admin/dashboard_admin.php">Painel Administrador</a>
-      <a href="../estoque/estoque.php">Controle de Estoque</a>
-      <a href="../pglogin/pglogin.php">Sair</a>
+      <a href="relatorio.php">Gerar Relatório</a>
+      <a href="../pglogin/logout.php">Sair</a>
     </nav>
   </header>
+</body>

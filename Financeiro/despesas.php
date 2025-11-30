@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registrar Entrada</title>
-  <link rel="stylesheet" href="../css/estilo.css" />
+    <link rel="stylesheet" href="../css/estilo.css" />
   <style>
     .form-box {
       max-width: 700px;
@@ -97,6 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>FERTIQUIM Fertilizantes</h1>
     <nav>
       <a href="../pginicial/pginicial.php">Início</a>
+      <a href="../financeiro/financeiro.php">Voltar</a>
       <a href="../pglogin/pglogin.php">Sair</a>
     </nav>
   </header>
@@ -156,9 +157,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
   </div>
 
-  <footer>
-    &copy; 2025 Fertiquim Fertilizantes. Todos os direitos reservados.
-  </footer>
+    <?php 
+  include '../base/rodape.php';
+  ?>
 
   <?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
     <div class="usuario-logado">

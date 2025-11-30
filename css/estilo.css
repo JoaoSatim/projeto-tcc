@@ -14,7 +14,9 @@
 }
 
 html, body {
-  height: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -24,6 +26,16 @@ body {
   color: #333;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+.rodape {
+    margin-top: auto;
+    background: #eee;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    color: #333;
 }
 
 header {
@@ -60,7 +72,9 @@ nav a {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+
+  
 }
 
 @media (max-width: 1200px) {
@@ -322,6 +336,16 @@ footer {
 }
 .deposito-card {
   background: url('../img/deposito.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
+.lucro-card {
+  background: url('../img/LUCRO.png') no-repeat center center/cover;
+  color: #fff;
+  border-left: 8px solid transparent;
+}
+.prejuizo-card {
+  background: url('../img/prejuizo.png') no-repeat center center/cover;
   color: #fff;
   border-left: 8px solid transparent;
 }

@@ -11,9 +11,18 @@ if (!isset($_SESSION['nome_usuario'])) {
 $funcionario_id = $_GET['funcionario_id'] ?? null;
 $funcionarios = $conn->query("SELECT id, nome FROM cadastro_funcionario");
 
+$funcionario_nome = "";
 $itens_inventario = [];
 
 if ($funcionario_id) {
+    // Busca nome do funcionário
+    $stmt_nome = $conn->prepare("SELECT nome FROM cadastro_funcionario WHERE id = ?");
+    $stmt_nome->bind_param("i", $funcionario_id);
+    $stmt_nome->execute();
+    $res_nome = $stmt_nome->get_result()->fetch_assoc();
+    $funcionario_nome = $res_nome['nome'] ?? "";
+
+    // Busca itens
     $stmt = $conn->prepare("
         SELECT ef.nome_produto, inv.quantidade, inv.data_entrega 
         FROM inventario_funcionario AS inv
@@ -54,10 +63,52 @@ if ($funcionario_id) {
     .tabela {
       width: 100%;
       border-collapse: collapse;
+      margin-top: 20px;
     }
     .tabela th, .tabela td {
       border: 1px solid #ccc;
       padding: 8px;
+      text-align: center;
+    }
+    .btn-imprimir {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-imprimir:hover {
+      background: #218838;
+    }
+
+    /* Layout para impressão */
+    @media print {
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .form-consulta, .btn-imprimir, .usuario-logado, footer {
+        display: none !important;
+      }
+      h2.titulo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .info-funcionario {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .tabela {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .tabela th {
+        background: #f2f2f2;
+      }
     }
   </style>
 </head>
@@ -82,6 +133,10 @@ if ($funcionario_id) {
   </form>
 
   <?php if ($funcionario_id): ?>
+    <div class="info-funcionario">
+      Inventário do Funcionário: <strong><?= htmlspecialchars($funcionario_nome) ?></strong>
+    </div>
+
     <?php if ($itens_inventario->num_rows > 0): ?>
       <table class="tabela">
         <thead>
@@ -101,6 +156,14 @@ if ($funcionario_id) {
           <?php endwhile; ?>
         </tbody>
       </table>
+
+      
+      <!-- Botão de impressão -->
+<a href="imprimir_inventario.php?funcionario_id=<?= $funcionario_id ?>" target="_blank">
+  <button type="button" class="btn-imprimir">🖨️ Imprimir Inventário</button>
+</a>
+
+
     <?php else: ?>
       <p>Nenhum item encontrado para este funcionário.</p>
     <?php endif; ?>
@@ -110,11 +173,12 @@ if ($funcionario_id) {
 <footer>
   &copy; 2025 Fertiquim Fertilizantes. Todos os direitos reservados.
 </footer>
-  <?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
-    <div class="usuario-logado">
-      <?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>
-    </div>
-  <?php endif; ?>
+
+<?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
+  <div class="usuario-logado">
+    <?= htmlspecialchars($_SESSION['nome_usuario']); ?>
+  </div>
+<?php endif; ?>
 
 </body>
 </html>

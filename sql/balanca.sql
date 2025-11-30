@@ -15,3 +15,4 @@ CREATE TABLE balanca_saida (
 );
 
 ALTER TABLE balanca_saida ADD COLUMN destino VARCHAR(255) AFTER peso_saida;
+ALTER TABLE balanca_entrada ADD COLUMN telefone VARCHAR(20) AFTER cpf_motorista;

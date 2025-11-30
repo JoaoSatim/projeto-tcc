@@ -23,6 +23,6 @@ if (!isset($_SESSION['nome_usuario'])) {
       <a href="../pginicial/pginicial.php">Início</a>
       <a href="../deposito/baixa_estoque.php">Baixa Estoque</a>
       <a href="../deposito/listar_baixas.php">Listar Baixas</a>
-      <a href="../pglogin/pglogin.php">Sair</a>
+      <a href="../pglogin/logout.php">Sair</a>
     </nav>
   </header>

@@ -2,8 +2,8 @@
 // rodape.php
 ?>
 
-<footer>
-  &copy; 2025 Fertiquim Fertilizantes. Todos os direitos reservados.
+<footer class="rodape">
+    © 2025 Fertiquim Fertilizantes. Todos os direitos reservados.
 </footer>
 
 <?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao'])): ?>

@@ -11,7 +11,7 @@ $tipo = $_GET['tipo'] ?? '';
 $id   = $_GET['id'] ?? 0;
 
 if ($tipo === 'entrada') {
-    $sql = "SELECT id, marca, placa, motorista, cpf_motorista, peso_entrada, data_entrada AS data_registro 
+    $sql = "SELECT id, marca, placa, motorista, cpf_motorista, telefone, peso_entrada, data_entrada AS data_registro 
             FROM balanca_entrada WHERE id = ?";
 } else {
     $sql = "SELECT id, placa, produto, destino, peso_saida, data_saida AS data_registro 
@@ -32,6 +32,7 @@ $motorista   = "-";
 $cpf_motorista = "-";
 $produto     = $dados['produto'] ?? "-";
 $destino     = $dados['destino'] ?? "-";
+$telefone     = $dados['telefone'] ?? "-";
 
 // Se for entrada
 if ($tipo === 'entrada') {
@@ -39,12 +40,13 @@ if ($tipo === 'entrada') {
     $marca         = $dados['marca'] ?? "-";
     $motorista     = $dados['motorista'] ?? "-";
     $cpf_motorista = $dados['cpf_motorista'] ?? "-";
+    $telefone = $dados['telefone'] ?? "-";
 } 
 // Se for saída, buscar dados da entrada correspondente
 else {
     $pesoSaida = $dados['peso_saida'] ?? 0;
 
-    $sqlEntrada = "SELECT peso_entrada, marca, motorista, cpf_motorista 
+    $sqlEntrada = "SELECT peso_entrada, marca, motorista, cpf_motorista, telefone 
                    FROM balanca_entrada 
                    WHERE placa = ? 
                    ORDER BY data_entrada DESC LIMIT 1";
@@ -57,6 +59,7 @@ else {
     $marca         = $res2['marca'] ?? "-";
     $motorista     = $res2['motorista'] ?? "-";
     $cpf_motorista = $res2['cpf_motorista'] ?? "-";
+      $telefone = $res2['telefone'] ?? "-";
 }
 
 $pesoSaida = $dados['peso_saida'] ?? $pesoSaida;
@@ -108,6 +111,7 @@ $tara = ($pesoEntrada && $pesoSaida) ? abs($pesoEntrada - $pesoSaida) : 0;
     <p><b>Placa:</b> <?= $dados['placa'] ?></p>
     <p><b>Motorista:</b> <?= $motorista ?></p>
     <p><b>CPF Motorista:</b> <?= $cpf_motorista ?></p>
+    <p><b>Telefone:</b> <?= $telefone ?></p>
     <?php if ($tipo === 'saida'): ?>
       <p><b>Produto:</b> <?= $produto ?></p>
       <p><b>Destino:</b> <?= $destino ?></p>

@@ -12,13 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     $placa = $_POST['placa'];
     $motorista = $_POST['motorista'];
     $cpf_motorista = $_POST['cpf_motorista'];
+    $telefone = $_POST['telefone'];   // ✅ corrigido
     $peso_entrada = $_POST['peso_entrada'];
     $data_entrada = date('Y-m-d H:i:s');
-
-    $sql = "INSERT INTO balanca_entrada (marca, placa, motorista, cpf_motorista, peso_entrada, data_entrada) 
-            VALUES (?, ?, ?, ?, ?, ?)";
+    
+    $sql = "INSERT INTO balanca_entrada (marca, placa, motorista, cpf_motorista, peso_entrada, data_entrada, telefone) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssis", $marca, $placa, $motorista, $cpf_motorista, $peso_entrada, $data_entrada);
+    $stmt->bind_param("ssssiss", $marca, $placa, $motorista, $cpf_motorista, $peso_entrada, $data_entrada, $telefone); // ✅ corrigido
     $stmt->execute();
 
     header("Location: entrada_balanca.php?success=1");
@@ -64,6 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 
             <label>CPF do Motorista:</label>
             <input type="text" name="cpf_motorista" placeholder="000.000.000-00" required>
+
+            <label>Telefone:</label>
+            <input type="text" name="telefone" placeholder="(00)00000-0000" required>
 
             <label>Peso Entrada (kg):</label>
             <input type="number" name="peso_entrada" placeholder="00000" required>

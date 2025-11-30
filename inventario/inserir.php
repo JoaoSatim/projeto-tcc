@@ -11,16 +11,26 @@ if (!isset($_SESSION['nome_usuario'])) {
 // Processamento do formulário
 $mensagem = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $funcionario_id = $_POST['funcionario_id'];
-    $item_id = $_POST['item_id'];
+    $funcionario_id = intval($_POST['funcionario_id']);
+    $item_id = intval($_POST['item_id']);
     $quantidade = intval($_POST['quantidade']);
+    $usuario = $conn->real_escape_string($_SESSION['nome_usuario']);
 
     $res = $conn->query("SELECT quantidade FROM estoque_fertilizantes WHERE id = $item_id");
     $estoque = $res->fetch_assoc();
 
     if ($estoque && $estoque['quantidade'] >= $quantidade) {
-        $conn->query("INSERT INTO inventario_funcionario (funcionario_id, item_id, quantidade) VALUES ($funcionario_id, $item_id, $quantidade)");
-        $conn->query("UPDATE estoque_fertilizantes SET quantidade = quantidade - $quantidade WHERE id = $item_id");
+        // Registra a entrega no inventário do funcionário
+        $conn->query("INSERT INTO inventario_funcionario (funcionario_id, item_id, quantidade) 
+                      VALUES ($funcionario_id, $item_id, $quantidade)");
+
+        // Atualiza o estoque, quem alterou e a data
+        $conn->query("UPDATE estoque_fertilizantes 
+                      SET quantidade = quantidade - $quantidade, 
+                          usuario = '$usuario', 
+                          data_atualizacao = NOW() 
+                      WHERE id = $item_id");
+
         $mensagem = "<p style='color:green;'>Item entregue com sucesso!</p>";
     } else {
         $mensagem = "<p style='color:red;'>Quantidade insuficiente no estoque.</p>";
@@ -61,6 +71,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .mensagem {
       margin: 10px 0;
       font-weight: bold;
+    }
+    .usuario-logado {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #eee;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -106,10 +125,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <footer>
   &copy; 2025 Fertiquim Fertilizantes. Todos os direitos reservados.
 </footer>
-  <?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
-    <div class="usuario-logado">
-      <?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>
-    </div>
-  <?php endif; ?>
+
+<?php if (isset($_SESSION['nome_usuario']) && isset($_SESSION['funcao_usuario'])): ?>
+  <div class="usuario-logado">
+    <?php echo htmlspecialchars($_SESSION['nome_usuario']); ?>
+  </div>
+<?php endif; ?>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-// Exemplo simples: você pode editar esse texto quando quiser
+
 $aviso = "🚀 Nova versão do sistema disponível! 
 
             *Correção e ajuste no setor de vendas!

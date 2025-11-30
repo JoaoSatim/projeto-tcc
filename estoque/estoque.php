@@ -108,7 +108,7 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
   <title>Estoque - Fertiquim</title>
   <link rel="stylesheet" href="../css/estilo.css">
   <style>
-    /* Ajuste da caixa de edição */
+    
     .editar-form {
       display: flex;
       align-items: center;
@@ -222,9 +222,9 @@ $result = $conn->query("SELECT * FROM estoque_fertilizantes ORDER BY data_atuali
           <td>
 <?php 
 $tipo_usuario = $_SESSION['funcao_usuario'] ?? ''; 
-if (temPermissao($tipo_usuario)){ ?>
-  <a href="?editar=<?php echo $row['id']; ?>">Editar</a> | 
-  <a href="?remover=<?php echo $row['id']; ?>" onclick="return confirm('Remover este item?')">Remover</a>
+  if (temPermissao($tipo_usuario)){ ?>
+    <a href="?editar=<?php echo $row['id']; ?>">Editar</a> | 
+    <a href="?remover=<?php echo $row['id']; ?>" onclick="return confirm('Remover este item?')">Remover</a>
 <?php } else { ?>
   <span class="link-desativado">Editar</span> | 
   <span class="link-desativado">Remover</span>

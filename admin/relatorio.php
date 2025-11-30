@@ -1,8 +1,14 @@
 <?php
+require_once '../conexaohost/conexao.php';
 session_start();
-include('../sessao/verifica_sessao.php');
-restringirAcesso(['Administrador', 'Proprietario', 'Vendedores']);
 
+include('../sessao/verifica_sessao.php');
+restringirAcesso(['Gerencia', 'Administrador', 'Proprietario']);
+
+if (!isset($_SESSION['nome_usuario'])) {
+    header("Location: ../pglogin/pglogin.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -14,24 +20,17 @@ restringirAcesso(['Administrador', 'Proprietario', 'Vendedores']);
 
 </head>
 <body>
-  <?php include '../base/cabecalho.php'; ?>
+<?php include '../base/administrador.php'; ?>
   <div class="container">
     <h2 class="titulo">Painel Principal</h2>
     <div class="cards">
-      <a href="vendas_tonelada.php"" class="card VendasInternas-card">
-        <h2></h2>
-      </a>
-      <a href="vendas_sacaria.php" class="card VendasExternas-card">
-        <h2></h2>
-      </a>
-        
-      <a href="../cliente/cliente.php" class="card Clientes-card">
-      <h2></h2>  
-      </a>
+     <a href="lucro.php" class="card lucro-card">
+     <h2></h2>
+     </a>
 
-      <a href="pendente.php" class="card Venda_pendente-card">
-      <h2></h2>  
-      </a>
+     <a href="despesas.php" class="card prejuizo-card">
+     <h2></h2>
+     </a>
 
     </div>
   </div>

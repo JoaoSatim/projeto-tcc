@@ -27,6 +27,6 @@ if (!isset($_SESSION['nome_usuario'])) {
       <a href="../nf/inserir.php">Inserir NF's</a>
       <a href="../nf/consultar.php">Consultar NF's</a>
       <a href="../nf/pendente.php">NF's Pendente</a>  
-      <a href="../pglogin/pglogin.php">Sair</a>
+      <a href="../pglogin/logout.php">Sair</a>
     </nav>
   </header>
