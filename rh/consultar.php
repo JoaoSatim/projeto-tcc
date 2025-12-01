@@ -30,7 +30,7 @@ $resultado = $conn->query("SELECT * FROM cadastro_funcionario ORDER BY nome ASC"
       padding: 80px;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      min-height: 80vh; 
+       
     }
 
     .titulo {
