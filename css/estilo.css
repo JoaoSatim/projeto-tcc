@@ -77,11 +77,11 @@ nav a {
    GRID DE CARDS (RESPONSIVO + BONITO)
 ============================================ */
 .cards {
-  display: grid;
-  justify-content: center; /* Centraliza quando poucos cards */
-  grid-template-columns: repeat(6, minmax(260px, 1fr));
-  gap: 20px;
-  padding: 10px 0;
+ display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  width: 100%;
 }
 
 .card {
@@ -236,3 +236,4 @@ nav a {
 .deposito-card { background: url('../img/deposito.png') no-repeat center/cover; }
 .lucro-card { background: url('../img/LUCRO.png') no-repeat center/cover; }
 .prejuizo-card { background: url('../img/prejuizo.png') no-repeat center/cover; }
+.relatorio-card { background: url('../img/RELATORIO.png') no-repeat center/cover; }
